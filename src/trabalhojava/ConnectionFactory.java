@@ -14,8 +14,13 @@ import java.sql.SQLException;
  * @author alexandre
  */
 public class ConnectionFactory {
-    public static Connection getConnection() throws SQLException{
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/dbPizzaria", "alexandre", "3227");
-
+     public Connection getConnection() {
+         try {
+            return
+        DriverManager.getConnection("jdbc:mysql://localhost/java",
+        "root", "Jeancl96");
+        } catch (SQLException e) {
+        throw new RuntimeException(e);
+        }
     }
 }
