@@ -30,7 +30,7 @@ public class PedidosPizza extends javax.swing.JPanel {
         telefoneTF = new javax.swing.JTextField();
         telefoneL = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        clienteJT = new javax.swing.JTable();
+        clienteTabelModel = new javax.swing.JTable();
         addB = new javax.swing.JButton();
         delB = new javax.swing.JButton();
         salvarBT1 = new javax.swing.JButton();
@@ -44,13 +44,13 @@ public class PedidosPizza extends javax.swing.JPanel {
 
         telefoneL.setText("Telefone:");
 
-        clienteJT.setModel(clienteTableModel);
-        clienteJT.addMouseListener(new java.awt.event.MouseAdapter() {
+        clienteTabelModel.setModel(clienteTableModel);
+        clienteTabelModel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clienteJTMouseClicked(evt);
+                clienteTabelModelMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(clienteJT);
+        jScrollPane2.setViewportView(clienteTabelModel);
 
         addB.setText("+");
         addB.addActionListener(new java.awt.event.ActionListener() {
@@ -127,9 +127,9 @@ public class PedidosPizza extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_telefoneTFActionPerformed
 
-    private void clienteJTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clienteJTMouseClicked
+    private void clienteTabelModelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clienteTabelModelMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_clienteJTMouseClicked
+    }//GEN-LAST:event_clienteTabelModelMouseClicked
 
     private void addBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBActionPerformed
             // Abrir tela para personalização do pedido
@@ -153,7 +153,7 @@ public class PedidosPizza extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addB;
     private javax.swing.JButton addB1;
-    private javax.swing.JTable clienteJT;
+    private javax.swing.JTable clienteTabelModel;
     private javax.swing.JButton delB;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton salvarBT1;
