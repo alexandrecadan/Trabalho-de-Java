@@ -68,16 +68,33 @@ public class SaborDAO {
         return precoSabor;
     }    
     
-        public void cadastrar(Sabor sabor, String tipo) {
+    public void cadastrar(Sabor sabor, String tipo) {
         try {
             Connection conn = new ConnectionFactory().getConnection();
-            final String sql = "INSERT INTO sabores VALUES (NULL, ?, ?, ?, ?)";
+            final String sql = "INSERT INTO sabores VALUES (?, ?, ?)";
 
             PreparedStatement preparedStmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStmt.setLong(1, sabor.getSaborID());
             preparedStmt.setString(2, sabor.getNomeSabor());
             preparedStmt.setString(3, tipo);
-            preparedStmt.setFloat(4, sabor.getPrecoSabor());
+
+            preparedStmt.executeUpdate();
+            preparedStmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+        
+    public void AtualizaPrecoSabor(float precoSabor,String tipo){
+    
+        try {
+            Connection conn = new ConnectionFactory().getConnection();
+            final String sql = "UPDATE sabores set precoSabor = ? where tipo = ? ";
+
+            PreparedStatement preparedStmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            preparedStmt.setFloat(1, precoSabor);
+            preparedStmt.setString(2, tipo);
 
             preparedStmt.executeUpdate();
             preparedStmt.close();
