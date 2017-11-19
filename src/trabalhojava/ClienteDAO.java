@@ -51,7 +51,7 @@ public class ClienteDAO {
     public Cliente pesquisarPorId(int id){
         String sql = "select * from cliente WHERE id=?";
 		
-        Cliente cliente = new Cliente();
+        Cliente cliente = new Cliente(1, "","","","");
         Connection conn = new ConnectionFactory().getConnection();
         PreparedStatement pStm;
         try

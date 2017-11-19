@@ -17,6 +17,14 @@ public class Cliente {
     private String telefone;
     private String endereco;
 
+    public Cliente(int id, String nome, String sobrenome, String telefone, String endereco) {
+        this.id = id;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.telefone = telefone;
+        this.endereco = endereco;
+    }
+
     public int getId() {
         return id;
     }
@@ -56,6 +64,31 @@ public class Cliente {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
     }
     
 }
