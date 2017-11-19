@@ -5,6 +5,8 @@
  */
 package trabalhojava;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author alexandre
@@ -12,7 +14,7 @@ package trabalhojava;
 public class Pizza {
    
     private Long pizzaid, pedidoid, saborid1, saborid2;
-    private String forma = "";
+    private String forma;
     private Double formaDimensao;
 
     public Long getPizzaid() {
@@ -63,4 +65,36 @@ public class Pizza {
         this.formaDimensao = formaDimensao;
     }
     
+    
+    public static float CalculaPizza (int idForma, float dimensao, String tipoSabor1, String tipoSabor2,int sabor1, int sabor2) throws SQLException{
+        
+        float valorCalculo = 0;
+        SaborDAO saborDAO = new SaborDAO();
+        if (tipoSabor2.equals("")){
+            valorCalculo =  saborDAO.precoSabor(tipoSabor1);
+        }
+        else{
+            valorCalculo = saborDAO.precoSabor(tipoSabor1) / saborDAO.precoSabor(tipoSabor2);
+        }
+        valorCalculo = CalculaArea(idForma,dimensao) * valorCalculo;
+        return valorCalculo;
+    }
+    
+    public static float CalculaArea(int idForma,float dimensao){
+        double valorPizzad = 0;
+        float pi = 3.14f;
+        
+        if(idForma == 1){                //Circulo
+            valorPizzad = (pi * (dimensao*dimensao)); 
+        }
+        else if(idForma == 2){          //Quadrado
+            valorPizzad = (dimensao * dimensao);
+        }
+        else{                          //Triangulo
+            valorPizzad = (((Math.sqrt(3))/4) * (dimensao * dimensao));
+        }
+        float f = (float)valorPizzad;  
+         
+        return f; 
+    }
 }

@@ -57,7 +57,7 @@ public class PizzaDAO {
             connection = new ConnectionFactory().getConnection();
             connection.createStatement();
             stmt = connection.prepareStatement(sql);
-            stmt.setDouble(1, pizza.getPizzaid());
+            stmt.setLong(1, pizza.getPizzaid());
             ResultSet rs = stmt.executeQuery();
             stmt.close();
             pizza.setPedidoid(rs.getLong("pedidoid")); 

@@ -221,11 +221,11 @@ public class ClienteDAO {
         } 
     }
     
-    public int possuiLocacao(Cliente cliente){
+    public int possuiPedido(Cliente cliente){
         int resposta=0;
         try {
             Connection conn = new ConnectionFactory().getConnection();
-            final String sql = "SELECT * FROM locacao where clienteId=?";
+            final String sql = "SELECT * FROM pedido where clienteId=?";
 
             System.out.println(cliente.getId());
             PreparedStatement stmt = conn.prepareStatement(sql);
