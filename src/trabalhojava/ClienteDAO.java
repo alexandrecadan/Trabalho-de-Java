@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalhojava;
 
 import java.io.IOException;
@@ -16,10 +11,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author alexandre
- */
 public class ClienteDAO {
     
    public List<Cliente> pesquisar(String nome){
@@ -202,6 +193,7 @@ public class ClienteDAO {
         }
     }
 
+    // Acho que esse não tem
     public void remover(Cliente cliente) {
             
     }
