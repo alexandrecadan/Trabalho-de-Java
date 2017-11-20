@@ -76,7 +76,8 @@ public class PizzaDAO {
             stmt.setString(4, pizza.getForma());
             stmt.setDouble(5, pizza.getFormaDimensao());
             stmt.setLong(6, pizza.getPizzaid());
-            stmt.execute();
+            stmt.executeUpdate();
+            connection.commit();
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);

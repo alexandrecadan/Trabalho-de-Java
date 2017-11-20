@@ -5,7 +5,6 @@
  */
 package trabalhojava;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -14,99 +13,79 @@ import javax.swing.table.AbstractTableModel;
  * @author Jean
  */
 public class ClienteTableModel extends AbstractTableModel {
+    
+    private static final int ID = 0;
+    private static final int NOME = 1;
+    private static final int SOBRENOME = 2;
+    private static final int TELEFONE = 3;
 
-      private static final int NUMERO_COLUNAS = 4;
-    
-    private static final int NOME = 0;
-    private static final int SOBRENOME = 1;
-    private static final int TELEFONE = 2;
-    private static final int ENDERECO = 3;
-    private String columnsNames[] = {"Nome", "Sobrenome", "Telefone", "Endereço"};
-    private List<Cliente> clientes;
-    private ClienteDAO clienteDao;
-    
-    public ClienteTableModel() {
-        clientes = new ArrayList<Cliente>();
-        clienteDao = new ClienteDAO();
-        listarCliente();
-    }
-    
-    public void atualizarCliente()
-    {
-        listarCliente();
-        fireTableDataChanged();
-    }
-    
-    
-    public Cliente getCliente(int index)
-    {
-        return clientes.get(index);
-    }   
-    
-      
-    public void removerCliente(Cliente cliente)
-    {
-        clienteDao.remover(cliente.getId());
-        atualizarCliente();
-    }
-    
-    public void listarCliente()
-    {
-        clientes.clear();
-        clientes = clienteDao.listar();
-        fireTableDataChanged();
-    }
-    
-    
-    public void pesquisarCliente(String nome)
-    {
-        clientes = clienteDao.pesquisarNome(nome);
-        fireTableDataChanged();
-    }
-    
-    public void pesquisarClienteSob(String nome)
-    {
-        clientes = clienteDao.pesquisarSobrenome(nome);
-        fireTableDataChanged();
-    }
-    
-    public void pesquisarClienteTelefone(String nome)
-    {
-        clientes = clienteDao.pesquisarTelefone(nome);
-        fireTableDataChanged();
-    }
-    
-    
-    @Override
-    public int getRowCount() {
-       return clientes.size();
-    }
+    private List<Cliente> valores;
 
-    @Override
+    public ClienteTableModel(List<Cliente> valores) {
+        this.valores = valores;
+    }
+    
     public int getColumnCount() {
-        return columnsNames.length;
+        return 4;
+    }   
+
+    public int getRowCount() {
+        return valores.size(); 
+    }
+
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Cliente cliente = valores.get(rowIndex); 
+
+        if (columnIndex == ID) { 
+            return cliente.getId();
+        } else if (columnIndex == NOME) {
+            return cliente.getNome();
+        } else if (columnIndex == SOBRENOME) {
+            return cliente.getSobrenome();
+        } else if (columnIndex == TELEFONE) {
+            return cliente.getTelefone();
+        }
+        return null;
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        Cliente cliente = clientes.get(rowIndex);
-        switch(columnIndex)
-        {
+    public String getColumnName(int column) { //
+        String coluna = "";
+        switch (column) {
+            case ID:
+                coluna = "Código";
+                break;
             case NOME:
-              return cliente.getNome()+" "+cliente.getSobrenome();
+                coluna = "Nome";
+                break;
             case SOBRENOME:
-              return cliente.getSobrenome();
+                coluna = "Sorenome";
+                break;
             case TELEFONE:
-              return cliente.getTelefone();
-            case ENDERECO:
-              return cliente.getEndereco();
+                coluna = "Telefone";
+                break;
+            default:
+                throw new IllegalArgumentException("Coluna inválida");
+        }
+        return coluna;
+    }
+
+    @Override 
+    public Class<?> getColumnClass(int columnIndex) {
+        if (columnIndex == ID) {
+            return Long.class;
+        } else if (columnIndex == NOME) {
+            return String.class;
+        } else if (columnIndex == SOBRENOME) {
+            return String.class;
+        } else if (columnIndex == TELEFONE) {
+            return String.class;
         }
         return null;
     }
     
-    @Override
-    public String getColumnName(int column) {
-        return columnsNames[column];
+    public Cliente get(int row) {
+        return valores.get(row);   //poder editar os dados na mesma tela
     }
     
 }
