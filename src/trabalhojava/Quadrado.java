@@ -9,6 +9,13 @@ package trabalhojava;
  *
  * @author alexandre
  */
-public class Quadrado {
+public class Quadrado extends Forma {
     
+    private double lado;
+
+    Quadrado(double lado) {
+        super();
+        this.lado = lado;
+        Quadrado.super.setValorForma(valorForma);
+    }   
 }

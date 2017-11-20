@@ -9,6 +9,14 @@ package trabalhojava;
  *
  * @author alexandre
  */
-public class Triangulo {
+public class Triangulo extends Forma{
+    
+    private double lado;
+
+    public Triangulo(double lado) {
+        super();
+        this.lado = lado;
+        Triangulo.super.setValorForma(valorForma);
+    }
     
 }

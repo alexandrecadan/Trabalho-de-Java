@@ -65,7 +65,8 @@ public class PedidoDAO {
             preparedStmt.setInt(3, pedido.getIdPizza());
             preparedStmt.setDouble(4, pedido.getValorTotal());
             preparedStmt.setObject(5, pedido.getStatusEnum());
-            preparedStmt.execute();
+            preparedStmt.executeUpdate();
+            conn.commit();
             preparedStmt.close();
             conn.close();
         } catch (SQLException ex) {

@@ -66,7 +66,7 @@ public class Pizza {
     }
     
     
-    public static float CalculaPizza (int idForma, float dimensao, String tipoSabor1, String tipoSabor2,int sabor1, int sabor2) throws SQLException{
+    public static float CalculaPizza (int codForma, float dimensao, String tipoSabor1, String tipoSabor2,int sabor1, int sabor2) throws SQLException{
         
         float valorCalculo = 0;
         SaborDAO saborDAO = new SaborDAO();
@@ -76,21 +76,21 @@ public class Pizza {
         else{
             valorCalculo = saborDAO.precoSabor(tipoSabor1) / saborDAO.precoSabor(tipoSabor2);
         }
-        valorCalculo = CalculaArea(idForma,dimensao) * valorCalculo;
+        valorCalculo = CalculaArea(codForma,dimensao) * valorCalculo;
         return valorCalculo;
     }
     
-    public static float CalculaArea(int idForma,float dimensao){
+    public static float CalculaArea(int codForma,float dimensao){
         double valorPizzad = 0;
         float pi = 3.14f;
         
-        if(idForma == 1){                //Circulo
+        if(codForma == 1){                //Circulo
             valorPizzad = (pi * (dimensao*dimensao)); 
         }
-        else if(idForma == 2){          //Quadrado
+        else if(codForma == 2){          //Quadrado
             valorPizzad = (dimensao * dimensao);
         }
-        else{                          //Triangulo
+        else{                          //TriSangulo
             valorPizzad = (((Math.sqrt(3))/4) * (dimensao * dimensao));
         }
         float f = (float)valorPizzad;  

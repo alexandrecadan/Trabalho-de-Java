@@ -9,6 +9,15 @@ package trabalhojava;
  *
  * @author alexandre
  */
-public class Circulo {
+public class  Circulo extends Forma {
+   
+    private double raio;
+    
+    public Circulo(double raio)
+    {
+        super();
+        this.raio = raio;
+        Circulo.super.setValorForma(valorForma);
+    }
     
 }
