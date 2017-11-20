@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalhojava;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
-/**
- *
- * @author alexandre
- */
 public class Pizza {
    
     private Long pizzaid, pedidoid, saborid1, saborid2;
@@ -97,4 +89,31 @@ public class Pizza {
          
         return f; 
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.pizzaid);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pizza other = (Pizza) obj;
+        if (!Objects.equals(this.pizzaid, other.pizzaid)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
