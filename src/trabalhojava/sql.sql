@@ -1,46 +1,71 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- * Author:  alexandre
- * Created: 15/11/2017
- */
-
---Criação do banco - Início
-
-
---EXEMPLO
-
-CREATE DATABASE dbo.Pizzaria;
-
-CREATE TABLE autor(
-    id serial,
-    nome varchar(45) NOT NULL,
-    constraint pk_Autor PRIMARY KEY (id)
+CREATE TABLE cliente (
+    id int(11) NOT NULL AUTO_INCREMENT,
+    nome varchar(255),
+    sobrenome varchar(255),
+    telefone varchar(255),
+    endereco varchar(255),
+    PRIMARY KEY (`id`)    
 );
 
-
-CREATE TABLE livro (
-    id serial,
-    titulo varchar(45),
-    constraint pk_Livro PRIMARY KEY (id)
+CREATE TABLE pedido (
+    id int(11) NOT NULL AUTO_INCREMENT,
+    idCliente int,
+    idPizza int,
+    valorTotal double,
+    estado varchar(255),
+    PRIMARY KEY (`id`),
+    KEY `idCliente` (`idCliente`),
+    KEY `idPizza` (`idPizza`)
 );
 
-CREATE TABLE Livro_Autor (
-    idLivro int,
-    idAutor int,
-    constraint pk_LivroAutor primary key(idLivro, idAutor),
-    constraint fk_Liv
+CREATE TABLE status (
+    aberto int,
+    caminho int,
+    entregue int
 );
 
---Criação do banco - Fim
+CREATE TABLE pizza (
+	id int(11) NOT NULL AUTO_INCREMENT,
+    idSaborUm int,
+    idSaborDois int,
+    idForma int,
+    valor double,
+	PRIMARY KEY (`id`),
+    KEY `idSaborUm` (`idSaborUm`),
+    KEY `idSaborDois` (`idSaborDois`),
+    KEY `idForma` (`idForma`)
+);
 
-select * from autor;
-select * from livro;
-select * from livro_autor;
---teste
-SELECT livro.id,livro.titulo FROM livro INNER JOIN livro_autor ON livro.id = livro_autor.idlivro WHERE livro_autor.idautor = 1
+CREATE TABLE sabor (
+	saborId serial,
+    tipoSabor long,
+    nomeSabor varchar(255),
+    precoSabor double
+);
 
-roAutor_pk_Livro foreign key(idLivro) references livro(id) on update cascade,
+CREATE TABLE forma (
+	id int(11) NOT NULL AUTO_INCREMENT,
+    idTipoForma int,
+    medida double,
+    valorForma double,
+    valorTotalForma double,
+    PRIMARY KEY (`id`),
+    KEY `idTipoForma` (`idTipoForma`)
+);
+
+CREATE TABLE circulo (
+	id int(11) NOT NULL AUTO_INCREMENT,
+    raio double,
+    PRIMARY KEY (`id`)
+);
+
+CREATE TABLE quadrado (
+	id int(11) NOT NULL AUTO_INCREMENT,
+    lado double,
+    PRIMARY KEY (`id`)
+);
+CREATE TABLE triangulo (
+	id int(11) NOT NULL AUTO_INCREMENT,
+    lado double,
+    PRIMARY KEY (`id`)
+);
