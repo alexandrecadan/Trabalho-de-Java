@@ -34,30 +34,6 @@ public class PedidoDAO {
         }
         return pedidos;
     }
-    
-    public List<Pedido> pesquisarPorCliente(int id) {
-        String sql = "select * from pedido WHERE idCliente = ? order by id";
-
-        List<Pedido> pedidos = new ArrayList<Pedido>();
-        Connection conn = new ConnectionFactory().getConnection();
-        PreparedStatement pStm;
-        try {
-            pStm = conn.prepareStatement(sql);
-
-            ResultSet rs = pStm.executeQuery();
-            while (rs.next()) {
-                Pedido lista = new Pedido(rs.getInt(id));
-                lista.setId(rs.getInt("id"));
-                pedidos.add(lista);
-            }
-            //não sei se precisa fechar a conexão aqui
-            pStm.close();
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return pedidos;
-    }
 
     public void cadastrar(Pedido pedido) {
         try {

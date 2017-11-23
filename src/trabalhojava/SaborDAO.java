@@ -46,36 +46,6 @@ public class SaborDAO {
         return sabor;
     }
         
-    public List<Sabor> listar() throws SQLException {
-            
-        List<Sabor> sabores = new ArrayList<Sabor>();    
-        Connection connection = null;
-        PreparedStatement stmt = null;
-        String sql= "select saborId, tipoSabor, nomeSabor, precoSabor from sabores";
-        try{
-            connection = new ConnectionFactory().getConnection();
-            connection.createStatement();
-            stmt = connection.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                Sabor sabor = new Sabor();
-                sabor.setNomeSabor(rs.getString("nomeSabor"));
-                sabor.setPrecoSabor(rs.getFloat("precoSabor"));
-                sabor.setSaborID(rs.getLong("saborId"));
-                sabor.setTipoSabor(rs.getLong("tipoSabor"));
-                
-                sabores.add(sabor);
-            }
-            stmt.close();
-            rs.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally{
-            connection.close();
-        }   
-        return sabores;
-    }
-        
     public float precoSabor(String tipoSabor) throws SQLException{
         Connection connection = null;
         PreparedStatement stmt = null;
@@ -132,20 +102,5 @@ public class SaborDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-    
-    public void remover(Long id) {
-        Connection conn = new ConnectionFactory().getConnection();
-        String sql = "delete from sabores"
-                + " where saborId = " + id;
-        PreparedStatement preparedStmt;
-        try {
-            preparedStmt = conn.prepareStatement(sql);
-            preparedStmt.execute();
-            preparedStmt.close();
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } 
     }
 }

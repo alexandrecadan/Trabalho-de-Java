@@ -24,8 +24,7 @@ public class Sabor {
         this.precoSabor = precoSabor;
     }
     
-    public Sabor() {
-    }
+
 
     public Long getSaborID() {
         return saborID;
