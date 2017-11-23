@@ -42,7 +42,7 @@ public class ClienteDAO {
     public Cliente pesquisarPorId(int id){
         String sql = "select * from cliente WHERE id=?";
 		
-        Cliente cliente = new Cliente(1, "","","","");
+        Cliente cliente = new Cliente();
         Connection conn = new ConnectionFactory().getConnection();
         PreparedStatement pStm;
         try
@@ -115,6 +115,29 @@ public class ClienteDAO {
         return clientes;
     }
     
+    public Cliente pesquisarTelefone(String telefone){
+        String sql = "select * from cliente WHERE  telefone like concat('%', ?, '%') order by nome";
+		
+        Cliente cliente = new Cliente();
+        Connection conn = new ConnectionFactory().getConnection();
+        PreparedStatement pStm;
+        try
+        {
+            pStm = conn.prepareStatement(sql);
+            pStm.setString(1, telefone);
+            ResultSet rs = pStm.executeQuery();
+        
+            if (rs.next()) {
+                cliente = criarCliente(rs);
+            }                        
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }                        
+        return cliente;
+    }
+    
     private Cliente criarCliente(ResultSet rs) throws SQLException {
         Cliente cliente = new Cliente();
         cliente.setId(rs.getInt("id"));
@@ -157,13 +180,13 @@ public class ClienteDAO {
     public void cadastrar(Cliente cliente) {
         try {
             Connection conn = new ConnectionFactory().getConnection();
-            final String sql = "INSERT INTO cliente VALUES (NULL, ?, ?, ?, ?, ?)";
+            final String sql = "INSERT INTO cliente VALUES (NULL, ?, ?, ?, ?)";
 
             PreparedStatement preparedStmt = conn.prepareStatement(sql);
             preparedStmt.setString(1, cliente.getNome());
             preparedStmt.setString(2, cliente.getSobrenome());
             preparedStmt.setString(3, cliente.getTelefone());
-            preparedStmt.setString(4, cliente.getEndereco());
+            //preparedStmt.setString(4, cliente.getEndereco());
 
             preparedStmt.execute();
             preparedStmt.close();
@@ -176,14 +199,14 @@ public class ClienteDAO {
     public void alterar(Cliente cliente) {
         try {
             Connection conn = new ConnectionFactory().getConnection();
-            final String sql = "UPDATE cliente SET nome = ?, sobrenome = ?, telefone = ?, endereco = ? where id = ?";
+            final String sql = "UPDATE cliente SET nome = ?, sobrenome = ?, telefone = ? where id = ?";
 
             PreparedStatement preparedStmt = conn.prepareStatement(sql);
             preparedStmt.setString(1, cliente.getNome());
             preparedStmt.setString(2, cliente.getSobrenome());
             preparedStmt.setString(3, cliente.getTelefone());
-            preparedStmt.setString(5, cliente.getEndereco());
-            preparedStmt.setInt(6, cliente.getId());
+            //preparedStmt.setString(5, cliente.getEndereco());
+            preparedStmt.setInt(5, cliente.getId());
 
             preparedStmt.execute();
             preparedStmt.close();
